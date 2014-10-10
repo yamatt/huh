@@ -6,7 +6,7 @@ from setuptools import find_packages
 setup(
     name = 'HardUpHumble',
     version = '0.1',
-    description = 'HardUp Humble is a program that allows you to monitor the cost of games.',
+    description = 'HardUpHumble is a program that allows you to monitor the cost of games.',
     author = 'Matt Copperwaite',
     author_email = 'matt@copperwaite.net',
     url = 'https://github.com/yamatt/harduphumble/',
