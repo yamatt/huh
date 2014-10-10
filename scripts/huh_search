@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+from huh.model import Game
+from huh.request import Request
+import sys
+
+def get_args():
+    return sys.argv[1]
+
+if __name__ == "__main__":
+    hib = Request()
+    results = hib.search(get_args())
+    for game in map(lambda result: Game.from_hib(**result), results.json()['results']):
+        print("{game}: ({id}) at {price:.2f}{currency}".format(game=game.name, id=game.id, price=game.current_price.value, currency=game.current_price.currency))
