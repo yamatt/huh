@@ -15,7 +15,7 @@ setup(
         "pyyaml",
         "requests"
     ],
-    scripts=['huh/huh_get_price', 'huh/huh'],
+    scripts=['scripts/huh', 'scripts/huh_search'],
     license = "AGPLv3",
     classifiers = [
         "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
