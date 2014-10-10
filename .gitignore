@@ -4,3 +4,6 @@
 *.db
 node_modules/*
 env/*
+*.egg*
+build/*
+dist/*
