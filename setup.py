@@ -4,7 +4,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 setup(
-    name = 'HardUp Humble',
+    name = 'HardUpHumble',
     version = '0.1',
     description = 'HardUp Humble is a program that allows you to monitor the cost of games.',
     author = 'Matt Copperwaite',
