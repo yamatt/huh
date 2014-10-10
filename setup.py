@@ -12,7 +12,8 @@ setup(
     url = 'https://github.com/yamatt/huh/',
     packages=["huh"],
     install_requires = [
-        "pyyaml"
+        "pyyaml",
+        "requests"
     ],
     scripts=['huh/huh_get_price', 'huh/huh'],
     license = "AGPLv3",
