@@ -9,7 +9,7 @@ setup(
     description = 'HardUpHumble is a program that allows you to monitor the cost of games.',
     author = 'Matt Copperwaite',
     author_email = 'matt@copperwaite.net',
-    url = 'https://github.com/yamatt/harduphumble/',
+    url = 'https://github.com/yamatt/huh/',
     packages=["huh"],
     install_requires = [
         "pyyaml"
