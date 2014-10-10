@@ -1,0 +1,8 @@
+---
+games:
+    - machine_name: ftlfasterthanlight_storefront
+      human_name: FTL
+      price: 5.00
+      currency: GBP
+      os: linux
+      platform: download

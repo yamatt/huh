@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+from wishlist import Wishlist, WishlistConfig
+from request import Request
+import sys
+
+def get_args():
+    if len(sys.argv) >= 2:
+        return {
+            "config_file_path": sys.argv[1]
+        }
+    return {}
+    
+def get_wishlist_config():
+    args = get_args()
+    if args.get("config_file_path"):
+        return WishlistConfig.from_file_path(args["config_file_path"])
+    return WishlistConfig.auto_load()
+
+def list_to_sentence(items, empty="none"):
+    if len(items) == 0:
+        return empty
+    elif len(items) == 1:
+        return items[0]
+    elif len(items) == 2:
+        return "{0} and {1}".format(*items)
+    else:
+        all_but = ", ".join(items[:-1])
+        return "{all_but} and {last}".format(all_but=all_but, last=items[-1])
+
+if __name__ == "__main__":
+    wl = Wishlist.get_games_from_config(get_wishlist_config())
+    hib = Request()
+    for wl_game in wl.games:
+        game = wl_game.get_matching_game(hib)
+        matches = wl_game.compare(game)
+        if matches:
+            print("{game} costs {price:.2f}{currency} and runs on {os} and is available through {platforms}.".format(
+                    game=game.name,
+                    price=game.current_price.value,
+                    currency=game.current_price.currency,
+                    os=list_to_sentence(game.os),
+                    platforms=list_to_sentence(game.platforms)
+                )
+            )
