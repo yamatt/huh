@@ -26,7 +26,11 @@ class Config(object):
             file_path = cls.DEFAULT_FILE
             
         with open(file_path, "r") as f:
-            return cls(**yaml.load(f))
+            return cls.from_file(f)
+            
+    @classmethod
+    def from_file(cls, file):
+        return cls(**yaml.load(file))
     
     def __init__(self, **kwargs):
         for k,v in kwargs.items():
