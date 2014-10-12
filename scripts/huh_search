@@ -2,12 +2,16 @@
 from huh.model import Game
 from huh.request import Request
 import sys
+import argparse
 
 def get_args():
-    return sys.argv[1]
+    argparser = argparse.ArgumentParser(description='Search for a game.')
+    argparser.add_argument('search', type=str, help='Value to search for. Required.')
+    args = argparser.parse_args()
+    return args
 
 if __name__ == "__main__":
     hib = Request()
-    results = hib.search(get_args())
+    results = hib.search(get_args().search)
     for game in map(lambda result: Game.from_hib(**result), results.json()['results']):
         print("{game}: ({id}) at {price:.2f}{currency}".format(game=game.name, id=game.id, price=game.current_price.value, currency=game.current_price.currency))

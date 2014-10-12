@@ -2,18 +2,18 @@
 from huh.wishlist import Wishlist, WishlistConfig
 from huh.request import Request
 import sys
+import argparse
 
 def get_args():
-    if len(sys.argv) >= 2:
-        return {
-            "config_file_path": sys.argv[1]
-        }
-    return {}
+    argparser = argparse.ArgumentParser(description='Search for a game.')
+    argparser.add_argument('-w', "--wishlist", type=file, required=False, help='Path to wishlist file.')
+    args = argparser.parse_args()
+    return args
     
 def get_wishlist_config():
     args = get_args()
-    if args.get("config_file_path"):
-        return WishlistConfig.from_file_path(args["config_file_path"])
+    if args.wishlist:
+        return WishlistConfig.from_file(args.wishlist)
     return WishlistConfig.auto_load()
 
 def list_to_sentence(items, empty="none"):
