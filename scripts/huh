@@ -28,17 +28,20 @@ def list_to_sentence(items, empty="none"):
         return "{all_but} and {last}".format(all_but=all_but, last=items[-1])
 
 if __name__ == "__main__":
-    wl = Wishlist.get_games_from_config(get_wishlist_config())
-    hib = Request()
-    for wl_game in wl.games:
-        game = wl_game.get_matching_game(hib)
-        matches = wl_game.compare(game)
-        if matches:
-            print("{game} costs {price:.2f}{currency} and runs on {os} and is available through {platforms}.".format(
-                    game=game.name,
-                    price=game.current_price.value,
-                    currency=game.current_price.currency,
-                    os=list_to_sentence(game.os),
-                    platforms=list_to_sentence(game.platforms)
+    try:
+        wl = Wishlist.get_games_from_config(get_wishlist_config())
+        hib = Request()
+        for wl_game in wl.games:
+            game = wl_game.get_matching_game(hib)
+            matches = wl_game.compare(game)
+            if matches:
+                print("{game} costs {price:.2f}{currency} and runs on {os} and is available through {platforms}.".format(
+                        game=game.name,
+                        price=game.current_price.value,
+                        currency=game.current_price.currency,
+                        os=list_to_sentence(game.os),
+                        platforms=list_to_sentence(game.platforms)
+                    )
                 )
-            )
+    except RuntimeError as e:
+        print e
