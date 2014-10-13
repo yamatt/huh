@@ -1,18 +1,28 @@
 import os
+import sys
+
 import yaml
 
 class Config(object):
     ENVIRONMENT_VARIABLE = "{0}_CONFIG_PATH".format(__name__.upper())
     DEFAULT_FILE = "config.yaml"
+    DEFAULT_NIX_FILE = "~/.config"
+    DEFAULT_WIN_FILE = os.environ.get('APPDATA')
     
     @classmethod
     def auto_load(cls):
         if os.environ.get(cls.ENVIRONMENT_VARIABLE):
             return cls.from_environment_variable()
-        elif os.path.isfile(cls.DEFAULT_FILE):
-            return cls.from_file_path()
         else:
-            raise RuntimeError("Config file cannot be found.")
+            if 'win' in sys.platform:
+                file_path = os.path.join(cls.DEFAULT_WIN_FILE, cls.DEFAULT_FILE)
+                if os.path.exists(file_path):
+                    return cls.from_file_path(file_path)
+            else:
+                file_path = os.path.join(cls.DEFAULT_NIX_FILE, cls.DEFAULT_FILE)
+                if os.path.exists(file_path):
+                    return cls.from_file_path(file_path)
+        raise RuntimeError("Configuration file at '{0}' could not be found.".format(file_path))
     
     @classmethod
     def from_environment_variable(cls, environment_variable=None):
