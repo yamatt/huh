@@ -2,7 +2,7 @@ from config import Config
 import model
 
 class WishlistConfig(Config):
-    DEFAULT_FILE = "~/.huh-wishlist.yaml"
+    DEFAULT_FILE = "huh-wishlist.yaml"
     
 class WishlistGame(model.Game):
     @classmethod
