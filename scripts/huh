@@ -35,7 +35,7 @@ if __name__ == "__main__":
             game = wl_game.get_matching_game(hib)
             matches = wl_game.compare(game)
             if matches:
-                print("{game} costs {price:.2f}{currency} and runs on {os} and is available through {platforms}.".format(
+                print(u"{game} costs {price:.2f}{currency} and runs on {os} and is available through {platforms}.".format(
                         game=game.name,
                         price=game.current_price.value,
                         currency=game.current_price.currency,
